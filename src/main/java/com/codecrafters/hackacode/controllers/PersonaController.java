@@ -1,0 +1,8 @@
+package com.codecrafters.hackacode.controllers;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PersonaController {
+    
+}
