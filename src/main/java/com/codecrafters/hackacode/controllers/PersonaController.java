@@ -8,7 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/personas")
+@RequestMapping(value = "/api/personas")
 public class PersonaController {
+    @Autowired
+    PersonaService personaService;
+    @GetMapping
+    public ArrayList<Persona> obtenerPersonas(){
+        return personaService.obtenerPersonas();
+    }
+    @PostMapping
+    public Persona guardarPersona(@RequestBody Persona persona){
+        return this.personaService.guardarPersona(persona);
+    }
 
 }
