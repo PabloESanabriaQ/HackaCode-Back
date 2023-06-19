@@ -16,7 +16,7 @@ public class Usuario extends Persona{
     @Id
     @Getter @Setter @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_usuario")
-    private Integer idUsuario;
+    private Long idUsuario;
 
     @Getter @Setter
     @Column(name="nombre_usuario")
@@ -24,7 +24,7 @@ public class Usuario extends Persona{
 
     @Getter @Setter
     private String contrasenia;
-    
+
     @Getter @Setter
     private Rol rol;
 }

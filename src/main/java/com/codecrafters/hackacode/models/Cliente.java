@@ -17,7 +17,7 @@ public class Cliente extends Persona {
     @Id
     @Getter @Setter @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_cliente")
-    private Integer idCliente;
+    private Long idCliente;
 
     @Getter @Setter
     private Integer edad;
