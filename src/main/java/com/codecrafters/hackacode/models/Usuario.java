@@ -7,11 +7,6 @@ import lombok.Setter;
 @Entity
 @Table(name= "usuarios")
 public class Usuario extends Persona{
-    
-    @Id
-    @Getter @Setter @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_usuario")
-    private Long idUsuario;
 
     @Getter @Setter
     @Column(name="nombre_usuario")

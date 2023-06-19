@@ -10,12 +10,12 @@ import java.util.Optional;
 
 
 @RestController()
-@RequestMapping("/api/empleados")
+@RequestMapping(value = "/api/empleados")
 public class EmpleadoController {
     @Autowired
     public EmpleadoService empleadoService;
 
-    @GetMapping("/")
+    @GetMapping
     public ArrayList<Empleado> obtenerEmpleados(){
         return empleadoService.obtenerEmpleados();
     }
@@ -23,7 +23,7 @@ public class EmpleadoController {
     public Optional<Empleado> obtenerEmpleadoPorId(Long id){
         return empleadoService.obtenerEmpleadoPorId(id);
     }
-    @PostMapping("/")
+    @PostMapping
     public Empleado guardarEmpleado(@RequestBody Empleado empleado){
         return this.empleadoService.guardarEmpleado(empleado);
     }
@@ -32,7 +32,7 @@ public class EmpleadoController {
         this.empleadoService.borrarEmpleado(idEmpleado);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public Empleado modificaEmpleado(@RequestBody Empleado empleado){
         return this.empleadoService.modificarEmpleado(empleado);
     }

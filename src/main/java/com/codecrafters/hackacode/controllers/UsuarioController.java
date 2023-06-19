@@ -9,13 +9,13 @@ import com.codecrafters.hackacode.models.Usuario;
 import com.codecrafters.hackacode.services.UsuarioService;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping(value = "/api/usuarios")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
     
-    @GetMapping("/")
+    @GetMapping
     public ArrayList<Usuario> obtenerUsuarios(){
         return usuarioService.obtenerUsuarios();
     }
@@ -25,7 +25,7 @@ public class UsuarioController {
         return usuarioService.obtenerUsuarioPorId(idUsuario).get();
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Usuario guardarUsuario(Usuario usuario){
         return usuarioService.guardarUsuario(usuario);
     }
@@ -35,7 +35,7 @@ public class UsuarioController {
         return usuarioService.eliminarUsuario(idUsuario);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public Usuario modificarUsuario(Usuario usuario){
         return usuarioService.modificarUsuario(usuario);
     }

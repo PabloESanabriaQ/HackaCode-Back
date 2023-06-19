@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class PersonaService {
@@ -17,5 +18,19 @@ public class PersonaService {
 
     public Persona guardarPersona(Persona persona){
         return personaRepository.save(persona);
+    }
+
+    public Optional<Persona> obtenerPersonaPorId(Long id){
+        return personaRepository.findById(id);
+    }
+
+
+    public boolean eliminarPersona(Long idPersona) {
+        try {
+            personaRepository.deleteById(idPersona);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

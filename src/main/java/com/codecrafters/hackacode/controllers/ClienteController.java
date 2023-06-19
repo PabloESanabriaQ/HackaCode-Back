@@ -9,13 +9,13 @@ import com.codecrafters.hackacode.models.Cliente;
 import com.codecrafters.hackacode.services.ClienteService;
 
 @RestController()
-@RequestMapping("/api/clientes")
+@RequestMapping(value = "/api/clientes")
 public class ClienteController {
     
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/")
+    @GetMapping
     public ArrayList<Cliente> obtenerClientes(){
         return clienteService.obtenerClientes();
     }
@@ -25,7 +25,7 @@ public class ClienteController {
         return clienteService.obtenerClientePorId(idCliente);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Cliente guardarCliente(Cliente cliente){
         return clienteService.guardarCliente(cliente);
     }
@@ -35,7 +35,7 @@ public class ClienteController {
         return clienteService.eliminarCliente(idCliente);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public Cliente modificarCliente(Cliente cliente){
         return clienteService.modificarCliente(cliente);
     }

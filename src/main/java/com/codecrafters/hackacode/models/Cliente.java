@@ -14,11 +14,6 @@ import lombok.Setter;
 @Table(name="clientes")
 public class Cliente extends Persona {
 
-    @Id
-    @Getter @Setter @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_cliente")
-    private Long idCliente;
-
     @Getter @Setter
     private Integer edad;
 
@@ -26,6 +21,6 @@ public class Cliente extends Persona {
     private Long altura;
 
     @Getter @Setter
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "idEntrada")
     private Entrada entradas[];
 }
