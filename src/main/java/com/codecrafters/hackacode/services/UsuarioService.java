@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.codecrafters.hackacode.models.Usuario;
 import com.codecrafters.hackacode.repositories.IUsuarioRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioService {
     
     @Autowired

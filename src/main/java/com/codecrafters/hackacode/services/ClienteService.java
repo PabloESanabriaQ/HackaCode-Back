@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.codecrafters.hackacode.models.Cliente;
 import com.codecrafters.hackacode.repositories.IClienteRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ClienteService {
     
     @Autowired

@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 
-@RestController("/api/empleados")
+@RestController()
+@RequestMapping("/api/empleados")
 public class EmpleadoController {
     @Autowired
-    EmpleadoService empleadoService;
+    public EmpleadoService empleadoService;
 
     @GetMapping("/")
     public ArrayList<Empleado> obtenerEmpleados(){
@@ -22,16 +23,16 @@ public class EmpleadoController {
     public Optional<Empleado> obtenerEmpleadoPorId(Long id){
         return empleadoService.obtenerEmpleadoPorId(id);
     }
-    @PostMapping
+    @PostMapping("/")
     public Empleado guardarEmpleado(@RequestBody Empleado empleado){
         return this.empleadoService.guardarEmpleado(empleado);
     }
-    @DeleteMapping
-    public void borrarEmpleado(@RequestBody Empleado empleado){
-        this.empleadoService.borrarEmpleado(empleado);
+    @DeleteMapping("/{idEmpleado}")
+    public void borrarEmpleado(@PathVariable Long idEmpleado){
+        this.empleadoService.borrarEmpleado(idEmpleado);
     }
 
-    @PutMapping
+    @PutMapping("/")
     public Empleado modificaEmpleado(@RequestBody Empleado empleado){
         return this.empleadoService.modificarEmpleado(empleado);
     }

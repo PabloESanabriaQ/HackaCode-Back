@@ -3,16 +3,13 @@ package com.codecrafters.hackacode.controllers;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.codecrafters.hackacode.models.Cliente;
 import com.codecrafters.hackacode.services.ClienteService;
 
-@RestController("/api/clientes")
+@RestController()
+@RequestMapping("/api/clientes")
 public class ClienteController {
     
     @Autowired
@@ -24,7 +21,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{idCliente}")
-    public Cliente obtenerCliente(Long idCliente){
+    public Cliente obtenerCliente(@PathVariable Long idCliente){
         return clienteService.obtenerClientePorId(idCliente);
     }
 
@@ -34,7 +31,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{idCliente}")
-    public boolean eliminarCliente(Long idCliente){
+    public boolean eliminarCliente(@PathVariable Long idCliente){
         return clienteService.eliminarCliente(idCliente);
     }
 

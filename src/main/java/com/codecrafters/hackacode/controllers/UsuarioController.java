@@ -3,16 +3,13 @@ package com.codecrafters.hackacode.controllers;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.codecrafters.hackacode.models.Usuario;
 import com.codecrafters.hackacode.services.UsuarioService;
 
-@RestController("/api/usuarios")
+@RestController
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -24,7 +21,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{idUsuario}")
-    public Usuario obtenerUsuario(Long idUsuario){
+    public Usuario obtenerUsuario(@PathVariable Long idUsuario){
         return usuarioService.obtenerUsuarioPorId(idUsuario).get();
     }
 
@@ -34,7 +31,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{idUsuario}")
-    public boolean eliminarUsuario(Long idUsuario){
+    public boolean eliminarUsuario(@PathVariable Long idUsuario){
         return usuarioService.eliminarUsuario(idUsuario);
     }
 
