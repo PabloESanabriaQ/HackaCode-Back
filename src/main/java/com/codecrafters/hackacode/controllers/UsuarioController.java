@@ -1,12 +1,20 @@
 package com.codecrafters.hackacode.controllers;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.codecrafters.hackacode.dto.CrearUsuarioDTO;
+import com.codecrafters.hackacode.models.ERol;
+import com.codecrafters.hackacode.models.Rol;
 import com.codecrafters.hackacode.models.Usuario;
 import com.codecrafters.hackacode.services.UsuarioService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/usuarios")
@@ -21,22 +29,38 @@ public class UsuarioController {
     }
 
     @GetMapping("/{idUsuario}")
-    public Usuario obtenerUsuario(@PathVariable Long idUsuario){
-        return usuarioService.obtenerUsuarioPorId(idUsuario).get();
+    public Usuario obtenerUsuario(@PathVariable String idUsuario){
+        return usuarioService.obtenerUsuarioPorId(Long.parseLong(idUsuario)).get();
     }
 
     @PostMapping
-    public Usuario guardarUsuario(Usuario usuario){
-        return usuarioService.guardarUsuario(usuario);
+    public ResponseEntity<Usuario> guardarUsuario(@Valid @RequestBody CrearUsuarioDTO usuario){
+
+        Set<Rol> roles = usuario.getRoles().stream()
+                .map(rol -> Rol.builder()
+                .name(ERol.valueOf(rol))
+                .build()
+                ).collect(Collectors.toSet());
+
+        Usuario usuarioGuardado = Usuario.builder()
+                .nombreUsuario(usuario.getNombreUsuario())
+                .emailUsuario(usuario.getEmail())
+                .contrasenia(usuario.getContrasenia())
+                .roles(roles)
+                .build();
+        
+        usuarioService.guardarUsuario(usuarioGuardado);
+
+        return ResponseEntity.ok(usuarioGuardado);
     }
 
     @DeleteMapping("/{idUsuario}")
-    public boolean eliminarUsuario(@PathVariable Long idUsuario){
-        return usuarioService.eliminarUsuario(idUsuario);
+    public boolean eliminarUsuario(@PathVariable String idUsuario){
+        return usuarioService.eliminarUsuario(Long.parseLong(idUsuario));
     }
 
     @PutMapping
-    public Usuario modificarUsuario(Usuario usuario){
+    public Usuario modificarUsuario(@Valid @RequestBody Usuario usuario){
         return usuarioService.modificarUsuario(usuario);
     }
 }
