@@ -1,23 +1,22 @@
 package com.codecrafters.hackacode.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "empleados")
 public class Empleado extends Persona {
 
-   @ManyToOne
-   Usuario usuario;
+    private boolean activo;
 
-    public Empleado(long id, String nombre, String apellido, int dni, String email, long telefono, Usuario usuario) {
-        super(id, nombre, apellido, dni, email, telefono);
-        this.usuario = usuario;
-    }
-
-    public Empleado(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    @ManyToOne
+    private Usuario usuario;
 
 }

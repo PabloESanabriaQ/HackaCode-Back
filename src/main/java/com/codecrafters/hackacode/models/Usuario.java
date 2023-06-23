@@ -1,21 +1,35 @@
 package com.codecrafters.hackacode.models;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name= "usuarios")
-public class Usuario extends Persona{
+public class Usuario {
 
-    @Getter @Setter
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id_usuario")
+    private Long idUsuario;
+
+    @Column(name="email_usuario")
+    private String emailUsuario;
+
     @Column(name="nombre_usuario")
     private String nombreUsuario;
-
-    @Getter @Setter
+    
     private String contrasenia;
 
-    @Getter @Setter
-    @ManyToOne
-    private Rol rol;
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Rol.class, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_rol"))
+    private Set<Rol> roles;
 }
