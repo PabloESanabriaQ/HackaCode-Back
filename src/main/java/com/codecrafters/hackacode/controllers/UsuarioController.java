@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.codecrafters.hackacode.dto.CrearUsuarioDTO;
@@ -19,7 +20,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/usuarios")
 public class UsuarioController {
-
+    PasswordEncoder passwordEncoder;
     @Autowired
     private UsuarioService usuarioService;
     
@@ -45,7 +46,7 @@ public class UsuarioController {
         Usuario usuarioGuardado = Usuario.builder()
                 .nombreUsuario(usuario.getNombreUsuario())
                 .emailUsuario(usuario.getEmail())
-                .contrasenia(usuario.getContrasenia())
+                .contrasenia(passwordEncoder.encode(usuario.getContrasenia()))
                 .roles(roles)
                 .build();
         
