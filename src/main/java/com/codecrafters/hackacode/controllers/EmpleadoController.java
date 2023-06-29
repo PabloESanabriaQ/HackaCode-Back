@@ -3,17 +3,18 @@ package com.codecrafters.hackacode.controllers;
 import com.codecrafters.hackacode.models.Empleado;
 import com.codecrafters.hackacode.services.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-
 @RestController()
 @RequestMapping(value = "/api/empleados")
+@PreAuthorize("hasRole('ADMINISTRADOR')")
 public class EmpleadoController {
     @Autowired
-    public EmpleadoService empleadoService;
+    private EmpleadoService empleadoService;
 
     @GetMapping
     public ArrayList<Empleado> obtenerEmpleados(){
