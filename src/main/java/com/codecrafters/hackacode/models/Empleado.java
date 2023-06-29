@@ -13,10 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "empleados")
 public class Empleado extends Persona {
-
     private boolean activo;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Usuario.class)
     private Usuario usuario;
+
+    @ManyToOne()
+    private Juego juego;
+
+    @OneToMany(targetEntity = Venta.class)
+    private Venta ventas[];
 
 }

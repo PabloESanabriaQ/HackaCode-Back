@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -18,5 +21,14 @@ public class Entrada {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_entrada")
     private long idEntrada;
-    private String nombre;
+    private String codigo;
+    private Long precio;
+    @ManyToMany(targetEntity = Juego.class)
+    private List<Juego> juego;
+    @ManyToOne()
+    private Cliente cliente;
+    private LocalDateTime horarioDelJuego;
+    @OneToOne
+    private Venta venta;
+
 }
