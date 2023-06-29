@@ -19,6 +19,7 @@ public class CrearUsuarioDTO {
 
     @NotBlank
     private String nombreUsuario;
+    @NotBlank
     private String contrasenia;
     private Set<String> roles;
 }
